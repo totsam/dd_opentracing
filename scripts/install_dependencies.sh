@@ -10,9 +10,9 @@ ZLIB_VERSION=${ZLIB_VERSION:-1.2.11}
 # our own versions, but under some circumstances (eg building opentracing-nginx
 # docker images) some of these dependencies are already provided.
 BUILD_OPENTRACING=1
-BUILD_CURL=1
-BUILD_MSGPACK=1
-BUILD_ZLIB=1
+BUILD_CURL=0
+BUILD_MSGPACK=0
+BUILD_ZLIB=0
 
 while test $# -gt 0
 do
@@ -38,8 +38,7 @@ if [ "$BUILD_OPENTRACING" -eq "1" ]; then
   mkdir opentracing-cpp-${OPENTRACING_VERSION}/.build
   cd opentracing-cpp-${OPENTRACING_VERSION}/.build
   cmake -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_CXX_FLAGS="-fPIC" \
-        -DBUILD_SHARED_LIBS=OFF \
+        -DBUILD_SHARED_LIBS=ON \
         -DBUILD_TESTING=OFF \
         -DBUILD_MOCKTRACER=OFF \
         ..
